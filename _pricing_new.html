@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-HK">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課堂收費 - 元朗柔術</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: {
+            ink: { 50: '#fafafa', 100: '#f5f5f5', 200: '#e5e5e5', 300: '#d4d4d4', 400: '#a3a3a3', 500: '#737373', 600: '#525252', 700: '#404040', 800: '#262626', 900: '#171717' },
+            dojo: { 50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca', 300: '#fca5a5', 400: '#f87171', 500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+  </style>
+</head>
+<body class="bg-white text-ink-900 antialiased">
+
+  <!-- Header -->
+  <header class="bg-ink-900 text-white py-6">
+    <div class="max-w-7xl mx-auto px-6">
+      <a href="index.html" class="text-lg font-bold">← 返回首頁</a>
+    </div>
+  </header>
+
+  <!-- Pricing Panel -->
+  <div class="py-16">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+      <div class="text-center mb-10">
+        <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">課堂收費</h1>
+        <p class="text-ink-600">透明價錢、彈性堂期，等你輕鬆開始</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Adult Monthly -->
+        <div class="p-6 border border-ink-200 rounded-2xl bg-white hover:border-ink-900 transition-colors">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-dojo-700 text-lg">👊</span>
+            <h3 class="text-lg font-bold">成人班月費</h3>
+          </div>
+          <p class="text-xs text-ink-500 mb-4">Monthly / Unlimited</p>
+          <button onclick="openImageModal('images/資訊_成人價錢.jpg')" class="mb-4 text-xs text-blue-600 hover:text-blue-800 underline">📷 查看海報</button>
+          <ul class="space-y-2 text-sm text-ink-700 mb-5">
+            <li class="flex justify-between"><span>1 個月任上</span><span class="font-semibold">$1350</span></li>
+            <li class="flex justify-between"><span>1 個月學生價</span><span class="font-semibold">$1000</span></li>
+            <li class="flex justify-between"><span>3 個月</span><span><span class="font-semibold">$3500</span><span class="text-xs text-ink-400 line-through ml-1">$4050</span></span></li>
+            <li class="flex justify-between"><span>半年</span><span class="font-semibold">$6200</span></li>
+          </ul>
+          <a href="https://wa.me/85266296630?text=%F0%9F%A5%8A%E3%80%90%E5%85%83%E6%9C%97%E6%9F%94%E8%A1%93%20YLJJ%20%E2%80%A2%20%E6%88%90%E4%BA%BA%E7%8F%AD%E6%9C%88%E8%B2%BB%E9%A0%90%E7%B4%84%E3%80%91%F0%9F%A5%8A%0A%0A%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E6%88%90%E4%BA%BA%E7%8F%AD%E6%9C%88%E8%B2%BB%EF%BC%9A%0A%0A1.%20%E8%81%AF%E7%B5%A1%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A2.%20%E8%81%AF%E7%B5%A1%E9%9B%BB%E8%A9%B1%EF%BC%9A%0A3.%20%E6%AC%B2%E9%A0%90%E7%B4%84%E7%9A%84%E8%A8%88%E5%89%87%EF%BC%9A%0A%20%20%20%5B%20%5D%201%E5%80%8B%E6%9C%88%E4%BB%BB%E4%B8%8A%20%241350%0A%20%20%20%5B%20%5D%201%E5%80%8B%E6%9C%88%E5%AD%B8%E7%94%9F%E5%83%B9%20%241000%0A%20%20%20%5B%20%5D%203%E5%80%8B%E6%9C%88%20%243500%0A%20%20%20%5B%20%5D%20%E5%8D%8A%E5%B9%B4%20%246200%0A4.%20%E7%90%86%E6%83%B3%E4%B8%8A%E5%A0%82%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%99%82%E9%96%93%EF%BC%9A"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors w-full justify-center">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.365.195 1.88.118.574-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            立即預約
+          </a>
+        </div>
+
+        <!-- Single Class Package -->
+        <div class="p-6 border border-ink-200 rounded-2xl bg-white hover:border-ink-900 transition-colors">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-dojo-700 text-lg">🎟️</span>
+            <h3 class="text-lg font-bold">單堂 Package</h3>
+          </div>
+          <p class="text-xs text-ink-500 mb-4">Flexible • Try Before You Commit</p>
+          <button onclick="openImageModal('images/資訊_單堂價錢.jpg')" class="mb-4 text-xs text-blue-600 hover:text-blue-800 underline">📷 查看海報</button>
+          <ul class="space-y-2 text-sm text-ink-700 mb-5">
+            <li class="flex justify-between"><span>試堂</span><span class="font-semibold">$150</span></li>
+            <li class="flex justify-between"><span>單堂</span><span class="font-semibold">$250</span></li>
+            <li class="flex justify-between"><span>4 堂 Package</span><span class="font-semibold">$950</span></li>
+            <li class="flex justify-between"><span>6 堂 Package</span><span class="font-semibold">$1200</span></li>
+          </ul>
+          <a href="https://wa.me/85266296630?text=%F0%9F%A5%8A%E3%80%90%E5%85%83%E6%9C%97%E6%9F%94%E8%A1%93%20YLJJ%20%E2%80%A2%20%E5%96%AE%E5%A0%82%20Package%20%E9%A0%90%E7%B4%84%E3%80%91%F0%9F%A5%8A%0A%0A%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E5%96%AE%E5%A0%82%20Package%EF%BC%9A%0A%0A1.%20%E8%81%AF%E7%B5%A1%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A2.%20%E8%81%AF%E7%B5%A1%E9%9B%BB%E8%A9%B1%EF%BC%9A%0A3.%20%E6%AC%B2%E9%A0%90%E7%B4%84%E7%9A%84%E8%A8%88%E5%89%87%EF%BC%9A%0A%20%20%20%5B%20%5D%20%E8%A9%A6%E5%A0%82%20%24150%0A%20%20%20%5B%20%5D%20%E5%96%AE%E5%A0%82%20%24250%0A%20%20%20%5B%20%5D%204%E5%A0%82%20%24950%0A%20%20%20%5B%20%5D%206%E5%A0%82%20%241200%0A4.%20%E7%90%86%E6%83%B3%E4%B8%8A%E5%A0%82%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%99%82%E9%96%93%EF%BC%9A"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors w-full justify-center">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.365.195 1.88.118.574-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            立即預約
+          </a>
+        </div>
+
+        <!-- Kids Class Package -->
+        <div class="p-6 border border-ink-200 rounded-2xl bg-white hover:border-ink-900 transition-colors">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-dojo-700 text-lg">👦</span>
+            <h3 class="text-lg font-bold">兒童班</h3>
+          </div>
+          <p class="text-xs text-ink-500 mb-4">Kids BJJ / Muay Thai / TKD</p>
+          <button onclick="openImageModal('images/資訊_兒童班價錢.jpg')" class="mb-4 text-xs text-blue-600 hover:text-blue-800 underline">📷 查看海報</button>
+          <ul class="space-y-2 text-sm text-ink-700 mb-5">
+            <li class="flex justify-between"><span>試堂</span><span class="font-semibold">$150</span></li>
+            <li class="flex justify-between"><span>單堂</span><span class="font-semibold">$220</span></li>
+            <li class="flex justify-between"><span>4 堂</span><span class="font-semibold">$800</span></li>
+            <li class="flex justify-between"><span>6 堂</span><span class="font-semibold">$1080</span></li>
+            <li class="flex justify-between"><span>8 堂</span><span class="font-semibold">$1280</span></li>
+          </ul>
+          <a href="https://wa.me/85266296630?text=%F0%9F%A5%8A%E3%80%90%E5%85%83%E6%9C%97%E6%9F%94%E8%A1%93%20YLJJ%20%E2%80%A2%20%E5%85%92%E7%AB%A5%E7%8F%AD%E9%A0%90%E7%B4%84%E3%80%91%F0%9F%A5%8A%0A%0A%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E5%85%92%E7%AB%A5%E7%8F%AD%EF%BC%9A%0A%0A1.%20%E8%81%AF%E7%B5%A1%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A2.%20%E5%85%92%E7%AB%A5%E5%A7%93%E5%90%8D%EF%BC%9A%0A3.%20%E5%85%92%E7%AB%A5%E5%B9%B4%E9%BE%8D%EF%BC%9A%0A4.%20%E6%AC%B2%E9%A0%90%E7%B4%84%E7%9A%84%E8%A8%88%E5%89%87%EF%BC%9A%0A%20%20%20%5B%20%5D%204%E5%A0%82%20%24800%0A%20%20%20%5B%20%5D%206%E5%A0%82%20%241080%0A%20%20%20%5B%20%5D%208%E5%A0%82%20%241280%0A5.%20%E7%90%86%E6%83%B3%E4%B8%8A%E5%A0%82%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%99%82%E9%96%93%EF%BC%9A"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors w-full justify-center">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.365.195 1.88.118.574-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            立即預約
+          </a>
+        </div>
+
+        <!-- Private Class -->
+        <div class="p-6 border border-ink-200 rounded-2xl bg-white hover:border-ink-900 transition-colors">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-dojo-700 text-lg">⭐</span>
+            <h3 class="text-lg font-bold">私人班</h3>
+          </div>
+          <p class="text-xs text-ink-500 mb-4">1-on-1 to 1-on-4 • 另設親子班</p>
+          <button onclick="openImageModal('images/資訊_私人班價錢.jpg')" class="mb-4 text-xs text-blue-600 hover:text-blue-800 underline">📷 查看海報</button>
+          <ul class="space-y-2 text-sm text-ink-700 mb-5">
+            <li class="flex justify-between"><span>1 on 1</span><span class="font-semibold">$500</span></li>
+            <li class="flex justify-between"><span>1 on 2</span><span class="font-semibold">$700</span></li>
+            <li class="flex justify-between"><span>1 on 3</span><span class="font-semibold">$900</span></li>
+            <li class="flex justify-between"><span>1 on 4</span><span class="font-semibold">$1000</span></li>
+            <li class="flex justify-between"><span>親子班</span><span class="text-xs text-dojo-700 font-medium">另設</span></li>
+          </ul>
+          <a href="https://wa.me/85266296630?text=%F0%9F%A5%8A%E3%80%90%E5%85%83%E6%9C%97%E6%9F%94%E8%A1%93%20YLJJ%20%E2%80%A2%20%E7%A7%81%E4%BA%BA%E7%8F%AD%E9%A0%90%E7%B4%84%E3%80%91%F0%9F%A5%8A%0A%0A%E6%88%91%E6%83%B3%E9%A0%90%E7%B4%84%E7%A7%81%E4%BA%BA%E7%8F%AD%EF%BC%9A%0A%0A1.%20%E8%81%AF%E7%B5%A1%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A2.%20%E8%81%AF%E7%B5%A1%E9%9B%BB%E8%A9%B1%EF%BC%9A%0A3.%20%E6%AC%B2%E9%A0%90%E7%B4%84%E7%9A%84%E7%A7%81%E4%BA%BA%E7%8F%AD%EF%BC%9A%0A%20%20%20%5B%20%5D%201%20on%201%20%24500%0A%20%20%20%5B%20%5D%201%20on%202%20%24700%0A%20%20%20%5B%20%5D%201%20on%203%20%24900%0A%20%20%20%5B%20%5D%201%20on%204%20%241000%0A%20%20%20%5B%20%5D%20%E8%A6%AA%E5%AD%90%E7%8F%AD%0A4.%20%E7%90%86%E6%83%B3%E4%B8%8A%E5%A0%82%E6%97%A5%E6%9C%9F%E5%8F%8A%E6%99%82%E9%96%93%EF%BC%9A"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors w-full justify-center">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.365.195 1.88.118.574-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.511-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            立即預約
+          </a>
+        </div>
+
+        <!-- Add-ons -->
+        <div class="p-6 border border-ink-200 rounded-2xl bg-ink-50 hover:border-ink-900 transition-colors">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-dojo-700 text-lg">⚙️</span>
+            <h3 class="text-lg font-bold">其他服務</h3>
+          </div>
+          <p class="text-xs text-ink-500 mb-4">Add-ons & Rentals</p>
+          <ul class="space-y-2 text-sm text-ink-700 mb-5">
+            <li class="flex justify-between"><span>場地租借 / 1小時</span><span class="font-semibold">$150</span></li>
+            <li class="flex justify-between"><span>Gi 道服租借</span><span class="font-semibold">$40</span></li>
+            <li class="flex justify-between"><span>Gi 存放及清洗 / 1個月</span><span class="font-semibold">$300</span></li>
+          </ul>
+          <a href="https://wa.me/85266296630?text=%F0%9F%A5%8A%E3%80%90%E5%85%83%E6%9C%97%E6%9F%94%E8%A1%93%20YLJJ%20-%20%E5%85%B6%E4%BB%96%E6%9C%8D%E5%8B%99%E6%9F%A5%E8%A9%A2%E3%80%91%F0%9F%A5%8A%0A%0A%E6%88%91%E6%83%B3%E6%9F%A5%E8%A9%A2%E5%85%B6%E4%BB%96%E6%9C%8D%E5%8B%99%EF%BC%9A%0A%0A1.%20%E8%81%AF%E7%B5%A1%E4%BA%BA%E5%A7%93%E5%90%8D%EF%BC%9A%0A2.%20%E8%81%AF%E7%B5%A1%E9%9B%BB%E8%A9%B1%EF%BC%9A%0A3.%20%E6%9C%8D%E5%8B%99%E9%A0%90%E8%A9%A2%EF%BC%9A%0A%20%20%20%5B%20%5D%20%E5%A0%82%E5%9C%B0%E7%A7%9F%E5%80%9F%20%24150%0A%20%20%20%5B%20%5D%20Gi%20%E9%81%93%E6%9C%8D%E7%A7%9F%E5%80%9F%20%2440%0A%20%20%20%5B%20%5D%20Gi%20%E5%AD%98%E6%94%BE%E5%8F%8A%E6%B8%85%E6%B6%88%20%24300/%E6%9C%88"
+               target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-ink-900 hover:bg-ink-800 text-white px-5 py-2.5 rounded-full text-sm font-semibold transition-colors w-full justify-center">
+            查詢詳情
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Terms & Conditions -->
+      <div class="mt-12 border border-ink-200 rounded-2xl bg-ink-50 p-6 md:p-8">
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">📋</span>
+          <h3 class="text-lg font-bold">注意事項</h3>
+        </div>
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-ink-700">
+          <li class="flex items-start gap-2">
+            <span class="text-dojo-700 mt-0.5 shrink-0">•</span>
+            <span>所定日期前後兩日免費改期，過期補堂需交 <strong>$50</strong> 行政費</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-dojo-700 mt-0.5 shrink-0">•</span>
+            <span>堂數不可轉讓他人使用</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-dojo-700 mt-0.5 shrink-0">•</span>
+            <span>所有課堂限一個月內上完，逾期作廢</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-dojo-700 mt-0.5 shrink-0">•</span>
+            <span>遺失會員卡補辦費用：$50</span>
+          </li>
+          <li class="flex items-start gap-2 md:col-span-2">
+            <span class="text-dojo-700 mt-0.5 shrink-0">•</span>
+            <span><strong>元朗柔術保留最終決定權</strong></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Payment Info -->
+      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-ink-500">
+        <p class="font-medium">繳費方式：</p>
+        <div class="flex gap-3">
+          <span class="bg-ink-100 px-4 py-1.5 rounded-full font-medium text-ink-700">FPS / PayMe：6629 6630</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="image-modal" class="fixed inset-0 z-[100] bg-black/90 hidden items-center justify-center p-4">
+    <button onclick="closeImageModal()" class="absolute top-4 right-4 text-white/80 hover:text-white p-2 z-10">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+    <img id="modal-image" src="" alt="海報" class="max-w-full max-h-[85vh] object-contain rounded-lg shadow-2xl" onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');">
+    <p class="hidden text-white text-center p-8">相片載入失敗</p>
+  </div>
+
+  <script>
+    function openImageModal(src) {
+      const modal = document.getElementById('image-modal');
+      const img = document.getElementById('modal-image');
+      img.src = src;
+      img.style.display = 'block';
+      const errorMsg = img.nextElementSibling;
+      if (errorMsg) errorMsg.classList.add('hidden');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeImageModal() {
+      const modal = document.getElementById('image-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // Close modal on backdrop click
+    document.getElementById('image-modal').addEventListener('click', function(e) {
+      if (e.target === this) closeImageModal();
+    });
+
+    // ESC to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeImageModal();
+    });
+  </script>
+
+</body>
+</html>

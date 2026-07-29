@@ -1,0 +1,50 @@
+[
+  {
+    "id": "don-siu-fu",
+    "name": "Don",
+    "name_en": "Siu Fu",
+    "role": "拳擊教練 / 巴西柔術教練（館主）",
+    "role_en": "Boxing Coach / BJJ Coach (Owner)",
+    "category": "coach",
+    "bjj_belt": "紫帶",
+    "bjj_stripes": 2,
+    "signature_move": "頭部搖晃，內圍拳擊拳",
+    "quote": "我愛 Phillip",
+    "whatsapp": "66296630",
+    "instagram": "https://www.instagram.com/siu_fu.don",
+    "bio": "元朗柔術館主，拳擊教練及巴西柔術教練。熱愛 Phillip，頭部搖晃同內圍拳擊拳係佢嘅招牌技能。",
+    "photo": "images/Don.jpg"
+  },
+  {
+    "id": "carrot",
+    "name": "Carrot",
+    "name_en": "Carrot",
+    "role": "學員 / 拳手",
+    "role_en": "Member / Fighter",
+    "category": "fighter",
+    "bjj_belt": "",
+    "bjj_stripes": 0,
+    "signature_move": "整呢個網站",
+    "quote": "that's crazy man",
+    "whatsapp": "",
+    "instagram": "https://www.instagram.com/carrot.s_crazy_diary",
+    "bio": "元朗柔術核心成員，整呢個網站的人。永遠喺度挑戰難關，that's crazy man.",
+    "photo": "images/carrot.jpg"
+  },
+  {
+    "id": "ming",
+    "name": "Ming",
+    "name_en": "Ming",
+    "role": "拳手 / 教練",
+    "role_en": "Fighter / Coach",
+    "category": "coach",
+    "bjj_belt": "白帶",
+    "bjj_stripes": 0,
+    "signature_move": "好簡單，好輕鬆",
+    "quote": "好簡單，好輕鬆",
+    "whatsapp": "90143553",
+    "instagram": "https://www.instagram.com/yuk_ml0901",
+    "bio": "元朗柔術教練兼拳手，好簡單，好輕鬆係佢嘅口頭禪。無論係訓練定比賽，佢都以輕鬆嘅心態面對。",
+    "photo": "images/ming.jpg"
+  }
+]
