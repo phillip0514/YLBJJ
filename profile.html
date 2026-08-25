@@ -104,14 +104,7 @@
               <p id="member-quote" class="text-xl md:text-2xl font-bold text-ink-800 leading-snug italic"></p>
             </blockquote>
 
-            <div class="prose prose-lg text-ink-600 mb-6 leading-relaxed">
-              <p id="member-bio"></p>
-            </div>
-
-            <div id="achievements-section" class="hidden mb-10">
-              <p class="text-xs font-semibold text-ink-400 uppercase tracking-widest mb-3">戰績</p>
-              <div id="member-achievements" class="bg-ink-50 border border-ink-200 rounded-xl p-4 text-sm text-ink-700 whitespace-pre-line"></div>
-            </div>
+            <div id="bio-sections" class="space-y-5 mb-10"></div>
 
             <div class="flex flex-wrap gap-4">
               <a id="whatsapp-link" href="#" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#128C7E] text-white px-6 py-3 rounded-full font-semibold transition-colors">
@@ -139,6 +132,7 @@
     </div>
   </main>
 
+  
   <!-- Footer -->
   <footer class="border-t border-ink-200 bg-ink-50">
     <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -158,14 +152,87 @@
     }
 
     function getBeltColor(belt) {
+      if (!belt || belt === '冇帶') return 'hidden';
       const map = {
-        '白帶': 'bg-white border border-ink-300',
+        '白帶': 'bg-white border-2 border-ink-300',
         '藍帶': 'bg-blue-600',
         '紫帶': 'bg-purple-600',
+        '棕帶': 'bg-amber-800',
         '啡帶': 'bg-amber-700',
         '黑帶': 'bg-black'
       };
-      return map[belt] || 'bg-ink-300';
+      return map[belt] || 'hidden';
+    }
+
+    function bioCard({ icon, label, content, list, accent }) {
+      const bg = accent ? 'bg-dojo-50 border-dojo-200' : 'bg-ink-50 border-ink-200';
+      const labelColor = accent ? 'text-dojo-700' : 'text-ink-500';
+      const body = list
+        ? `<ul class="space-y-1.5 ml-9 text-sm text-ink-700">${list.map(item => `
+            <li class="flex items-baseline gap-2">
+              <span class="w-1.5 h-1.5 bg-dojo-600 rounded-full mt-2 flex-shrink-0"></span>
+              <span>${item}</span>
+            </li>`).join('')}</ul>`
+        : `<p class="text-base text-ink-800 leading-relaxed ml-9">${content}</p>`;
+      return `
+        <div class="${bg} border rounded-2xl p-6">
+          <div class="flex items-center gap-3 mb-3">
+            <span class="text-2xl">${icon}</span>
+            <span class="text-xs font-bold ${labelColor} uppercase tracking-widest">${label}</span>
+          </div>
+          ${body}
+        </div>`;
+    }
+
+    function renderBioSections(m) {
+      const sections = [];
+
+      // 習武年資
+      if (m.years && m.years.trim()) {
+        sections.push(bioCard({ icon: '🎯', label: '習武年資', content: m.years }));
+      }
+
+      // 戰績 - case by case
+      const hasBjj = m.achievements_bjj && m.achievements_bjj.trim();
+      const hasBoxing = m.achievements_boxing && m.achievements_boxing.trim();
+      const hasLegacy = m.achievements && m.achievements.trim();
+      const hasSplit = hasBjj || hasBoxing;
+
+      if (hasSplit) {
+        // 拆 BJJ / Boxing 兩個 cards（如果齊料）
+        if (hasBjj) {
+          const list = m.achievements_bjj.split('\n').map(s => s.trim()).filter(Boolean);
+          sections.push(bioCard({ icon: '🥋', label: 'Brazilian Jiu-Jitsu', list }));
+        }
+        if (hasBoxing) {
+          const list = m.achievements_boxing.split('\n').map(s => s.trim()).filter(Boolean);
+          sections.push(bioCard({ icon: '🥊', label: 'Boxing', list }));
+        }
+      } else if (hasLegacy) {
+        // 唔分，做一個 generic card
+        const list = m.achievements.split('\n').map(s => s.trim()).filter(Boolean);
+        sections.push(bioCard({ icon: '🏆', label: '戰績', list }));
+      }
+
+      // 點解接觸武術
+      if (m.reason && m.reason.trim()) {
+        sections.push(bioCard({ icon: '❓', label: '點解接觸武術？', content: m.reason }));
+      }
+
+      // 擂台以外
+      if (m.hobby && m.hobby.trim()) {
+        sections.push(bioCard({ icon: '🎮', label: '擂台以外', content: m.hobby }));
+      }
+
+      // Fallback: 冇 structed fields 用舊 bio
+      if (sections.length === 0 && m.bio && m.bio.trim()) {
+        const paragraphs = m.bio.split(/\n\n+/);
+        for (const p of paragraphs) {
+          if (p.trim()) sections.push(`<p class="text-ink-700 leading-relaxed">${p.replace(/\n/g, '<br>')}</p>`);
+        }
+      }
+
+      document.getElementById('bio-sections').innerHTML = sections.join('');
     }
 
     function renderProfile(member) {
@@ -178,17 +245,20 @@
       document.getElementById('member-name').textContent = member.name;
       document.getElementById('member-move').textContent = member.signature_move;
       document.getElementById('member-quote').textContent = member.quote;
-      document.getElementById('member-bio').textContent = member.bio;
 
-      // Show achievements if available
-      if (member.achievements) {
-        document.getElementById('member-achievements').textContent = member.achievements;
-        document.getElementById('achievements-section').classList.remove('hidden');
+      renderBioSections(member);
+
+      // Belt badge - hide for 冇帶 or empty
+      const beltBadge = document.getElementById('belt-badge');
+      if (member.bjj_belt && member.bjj_belt !== '冇帶') {
+        beltBadge.classList.remove('hidden');
+        const beltDot = document.getElementById('belt-dot');
+        const beltColor = getBeltColor(member.bjj_belt);
+        beltDot.className = 'w-3 h-3 rounded-full ' + beltColor;
+        document.getElementById('belt-label').textContent = member.bjj_belt;
+      } else {
+        beltBadge.classList.add('hidden');
       }
-
-      const beltDot = document.getElementById('belt-dot');
-      beltDot.className = 'w-3 h-3 rounded-full ' + getBeltColor(member.bjj_belt);
-      document.getElementById('belt-label').textContent = member.bjj_belt;
 
       if (member.whatsapp && member.whatsapp !== 'BLINK001') {
         const waLink = document.getElementById('whatsapp-link');

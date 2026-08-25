@@ -150,10 +150,11 @@
                 <h3 class="text-lg font-bold tracking-tight">${member.name}</h3>
                 ${member.name_en ? `<p class="text-xs text-ink-500">${member.name_en}</p>` : ''}
               </div>
+              ${member.bjj_belt && member.bjj_belt !== '冇帶' ? `
               <span class="inline-flex items-center gap-1.5 bg-ink-100 text-ink-700 text-xs font-semibold px-3 py-1.5 rounded-full whitespace-nowrap">
                 <span class="w-2.5 h-2.5 rounded-full ${getBeltColor(member.bjj_belt)}"></span>
-                ${member.bjj_belt || '無帶'}
-              </span>
+                ${member.bjj_belt}
+              </span>` : ''}
             </div>
             ${member.quote ? `<p class="text-sm text-ink-600 italic line-clamp-2">"${member.quote}"</p>` : ''}
           </div>
@@ -163,14 +164,16 @@
     }
 
     function getBeltColor(belt) {
+      if (!belt || belt === '冇帶') return 'hidden';
       const map = {
-        '白帶': 'bg-white border border-ink-300',
+        '白帶': 'bg-white border-2 border-ink-300',
         '藍帶': 'bg-blue-600',
         '紫帶': 'bg-purple-600',
+        '棕帶': 'bg-amber-800',
         '啡帶': 'bg-amber-700',
         '黑帶': 'bg-black'
       };
-      return map[belt] || 'bg-ink-300';
+      return map[belt] || 'hidden';
     }
 
     function filterMembers(category) {
