@@ -344,6 +344,25 @@
     "photo": "images/kalok.jpg"
   },
   {
+    "id": "mario-liu",
+    "name": "廖玟皓 Mario Liu",
+    "name_en": "Mario Liu",
+    "role": "拳手/學員 / 拳皇(Play It Together)",
+    "role_en": "Fighter / Member",
+    "category": "fighter",
+    "bjj_belt": "",
+    "bjj_stripes": 0,
+    "signature_move": "旋轉踭",
+    "quote": "認真鳩搞囉",
+    "whatsapp": "65353606",
+    "instagram": "https://www.instagram.com/new_manho",
+    "years": "1年",
+    "reason": "Mental health。",
+    "hobby": "捉棋、打獵、拍微電影",
+    "achievements": "1-0-0",
+    "photo": "images/mario-liu.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
