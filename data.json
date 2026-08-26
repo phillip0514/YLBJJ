@@ -363,6 +363,25 @@
     "photo": "images/mario-liu.jpg"
   },
   {
+    "id": "sunny-cheng",
+    "name": "鄭旭倫 Sunny Cheng",
+    "name_en": "Sunny Cheng",
+    "role": "學員 / 插蘇榮譽管理員",
+    "role_en": "Member",
+    "category": "member",
+    "bjj_belt": "白帶",
+    "bjj_stripes": 0,
+    "signature_move": "納爾遜式鎖",
+    "quote": "Jiujitsu is gae",
+    "whatsapp": "66200664",
+    "instagram": "https://www.instagram.com/sunnycheng0114",
+    "years": "",
+    "reason": "鳩搞。",
+    "hobby": "打排波",
+    "achievements": "2025 Copa de HK 第三名",
+    "photo": "images/sunny-cheng.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
