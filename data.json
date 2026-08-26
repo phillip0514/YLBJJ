@@ -382,6 +382,25 @@
     "photo": "images/sunny-cheng.jpg"
   },
   {
+    "id": "mien",
+    "name": "面 Mien",
+    "name_en": "Mien",
+    "role": "學員",
+    "role_en": "Member",
+    "category": "member",
+    "bjj_belt": "紫帶",
+    "bjj_stripes": 0,
+    "signature_move": "Heel Hook",
+    "quote": "我要食飯",
+    "whatsapp": "",
+    "instagram": "https://www.instagram.com/foodmien",
+    "years": "7年",
+    "reason": "暗戀嘅長髮男鍾意睇UFC。",
+    "hobby": "剪片",
+    "achievements": "",
+    "photo": "images/mien.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
