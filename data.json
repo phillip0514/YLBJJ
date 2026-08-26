@@ -306,6 +306,25 @@
     "photo": "images/gabriel-ho.jpg"
   },
   {
+    "id": "chu-yuet-long",
+    "name": "朱悅朗 Chu Yuet Long",
+    "name_en": "Chu Yuet Long",
+    "role": "拳手 / 元朗柔術清潔部主管",
+    "role_en": "Fighter",
+    "category": "fighter",
+    "bjj_belt": "白帶",
+    "bjj_stripes": 0,
+    "signature_move": "Overhand",
+    "quote": "No failure no flavor",
+    "whatsapp": "",
+    "instagram": "https://www.instagram.com/yuet_long_1120",
+    "years": "1年半",
+    "reason": "突然心血來潮覺得型。",
+    "hobby": "潛水 🤿",
+    "achievements": "",
+    "photo": "images/chu-yuet-long.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
