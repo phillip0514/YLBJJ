@@ -287,6 +287,25 @@
     "photo": "images/tony-tam.jpg"
   },
   {
+    "id": "gabriel-ho",
+    "name": "何浚謙 Gabriel Ho",
+    "name_en": "Gabriel Ho",
+    "role": "拳手/學員/元柔麻雀ATM",
+    "role_en": "Fighter / Member",
+    "category": "fighter",
+    "bjj_belt": "白帶",
+    "bjj_stripes": 0,
+    "signature_move": "Sweep",
+    "quote": "我愛兔仔",
+    "whatsapp": "94462466",
+    "instagram": "https://www.instagram.com/gabriel_on9zai",
+    "years": "大概 2 年",
+    "reason": "覺得好型。",
+    "hobby": "彈 bass / 吹 saxophone / 拍電影 / 麻雀。",
+    "achievements": "0-3",
+    "photo": "images/gabriel-ho.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
