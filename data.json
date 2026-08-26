@@ -325,6 +325,25 @@
     "photo": "images/chu-yuet-long.jpg"
   },
   {
+    "id": "kalok",
+    "name": "Kalok",
+    "name_en": "Kalok",
+    "role": "拳手/學員 + 冗員",
+    "role_en": "Fighter / Member",
+    "category": "fighter",
+    "bjj_belt": "白帶",
+    "bjj_stripes": 0,
+    "signature_move": "鳩噏當秘笈",
+    "quote": "夠做埋黎",
+    "whatsapp": "",
+    "instagram": "",
+    "years": "3年",
+    "reason": "鍾意隻揪。",
+    "hobby": "LOL",
+    "achievements": "",
+    "photo": "images/kalok.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
