@@ -401,6 +401,25 @@
     "photo": "images/mien.jpg"
   },
   {
+    "id": "malaika-lam",
+    "name": "林偉儀 Malaika Lam",
+    "name_en": "Malaika Lam",
+    "role": "學員",
+    "role_en": "Student",
+    "category": "member",
+    "bjj_belt": "",
+    "bjj_stripes": 0,
+    "signature_move": "1-2-3",
+    "quote": "IDK",
+    "whatsapp": "94774842",
+    "instagram": "",
+    "years": "Boxing + Muay Thai 1年 / Wrestling 2個月",
+    "reason": "My brother train martial arts so I want to train too.",
+    "hobby": "睇 drama",
+    "achievements": "",
+    "photo": "images/malaika-lam.jpg"
+  },
+  {
     "id": "andy",
     "name": "安迪 Andy",
     "name_en": "Andy",
