@@ -74,6 +74,7 @@
       <button onclick="filterMembers('coach')" id="filter-coach" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">教練</button>
       <button onclick="filterMembers('fighter')" id="filter-fighter" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">拳手</button>
       <button onclick="filterMembers('member')" id="filter-member" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">會員</button>
+      <button onclick="filterMembers('cat')" id="filter-cat" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">🐱 喵</button>
     </div>
   </div>
 
@@ -120,7 +121,8 @@
         const role = m.role.toLowerCase();
         if (filter === 'coach') return role.includes('教練') || role.includes('coach');
         if (filter === 'fighter') return role.includes('拳手') || role.includes('fighter');
-        if (filter === 'member') return role.includes('會員') || role.includes('member') || m.category === 'member' || m.show_in_members;
+        if (filter === 'member') return role.includes('會員') || role.includes('學員') || role.includes('member') || m.category === 'member' || m.show_in_members;
+        if (filter === 'cat') return m.category === 'cat';
         return true;
       });
 
