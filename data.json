@@ -437,5 +437,43 @@
     "hobby": "食字。",
     "achievements": "",
     "photo": "images/andy.jpg"
+  },
+  {
+    "id": "yl-cat-1",
+    "name": "橘吉 Orange",
+    "name_en": "Orange",
+    "role": "拳館貓貓 / Yoga Master",
+    "role_en": "Dojo Cat / Yoga Master",
+    "category": "cat",
+    "bjj_belt": "貓帶 🐱",
+    "bjj_stripes": 9,
+    "signature_move": "伸展",
+    "quote": "喵～",
+    "whatsapp": "",
+    "instagram": "",
+    "years": "住喺拳館",
+    "reason": "本身就住喺度㗎啦。",
+    "hobby": "瞓覺、督豆腐、督會員",
+    "achievements": "成功統治全場教練同學員 🏆",
+    "photo": "images/yl-cat-yoga.jpg"
+  },
+  {
+    "id": "yl-cat-2",
+    "name": "大眼 Bigeyes",
+    "name_en": "Bigeyes",
+    "role": "拳館貓貓 / 拖鞋殺手",
+    "role_en": "Dojo Cat / Slipper Killer",
+    "category": "cat",
+    "bjj_belt": "貓帶 🐱",
+    "bjj_stripes": 9,
+    "signature_move": "霸佔拖鞋",
+    "quote": "喵！",
+    "whatsapp": "",
+    "instagram": "",
+    "years": "住喺拳館",
+    "reason": "驚見到師兄就自動報到。",
+    "hobby": "瞓覺、咬拖鞋、瞪大眼",
+    "achievements": "全場最萌眼神 🏆",
+    "photo": "images/yl-cat-slipper.jpg"
   }
 ]
