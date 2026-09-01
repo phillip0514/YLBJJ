@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://phillip0514.github.io/YLBJJ/sitemap.xml
