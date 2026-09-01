@@ -441,6 +441,25 @@
     "photo": "images/andy.jpg"
   },
   {
+    "id": "joey",
+    "name": "梁祖然 Joey",
+    "name_en": "Joey",
+    "role": "學員 + 清潔員",
+    "role_en": "Member",
+    "category": "member",
+    "bjj_belt": "",
+    "bjj_stripes": 0,
+    "signature_move": "今成翻滾",
+    "quote": "操到未必係你，但係休息一定係",
+    "whatsapp": "",
+    "instagram": "",
+    "years": "",
+    "reason": "因為型",
+    "hobby": "唱歌",
+    "achievements": "",
+    "photo": "images/joey.jpg"
+  },
+  {
     "id": "kimura",
     "name": "木村",
     "name_en": "Kimura",
