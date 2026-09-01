@@ -83,15 +83,22 @@
         </a>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          <!-- Photo -->
+          <!-- Photo carousel -->
           <div class="relative">
-            <div class="aspect-[3/4] bg-ink-100 rounded-2xl overflow-hidden">
-              <img id="member-photo" src="" alt="" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22400%22><rect width=%22300%22 height=%22400%22 fill=%22%23f5f5f5%22/><text x=%22150%22 y=%22200%22 text-anchor=%22middle%22 dy=%22.3em%22 font-family=%22Inter,system-ui,sans-serif%22 font-size=%2248%22 fill=%22%23737373%22>?</text></svg>';">
+            <div id="photo-viewport" class="aspect-[3/4] bg-ink-100 rounded-2xl overflow-hidden relative">
+              <!-- slides injected by JS -->
             </div>
-            <div id="belt-badge" class="absolute top-4 left-4 bg-white/90 backdrop-blur-md border border-ink-200 px-4 py-2 rounded-full flex items-center gap-2 shadow-sm">
+            <div id="belt-badge" class="absolute top-4 left-4 bg-white/90 backdrop-blur-md border border-ink-200 px-4 py-2 rounded-full flex items-center gap-2 shadow-sm z-10">
               <span id="belt-dot" class="w-3 h-3 rounded-full"></span>
               <span id="belt-label" class="text-sm font-bold tracking-wide"></span>
             </div>
+            <button id="photo-prev" type="button" class="hidden absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-ink-900 w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-colors z-20" aria-label="上一張">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <button id="photo-next" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-ink-900 w-10 h-10 rounded-full shadow-lg flex items-center justify-center transition-colors z-20" aria-label="下一張">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <div id="photo-dots" class="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-20"></div>
           </div>
 
           <!-- Info -->
@@ -150,6 +157,11 @@
   </footer>
 
   <script>
+    let carouselSlides = [];
+    let carouselIndex = 0;
+    // Track if user has interacted with the currently-active video so we don't auto-resume after they paused
+    const userInteracted = new WeakMap();
+
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(param);
@@ -167,6 +179,110 @@
       };
       return map[belt] || 'hidden';
     }
+
+    function renderPhotoCarousel(images, fallbackAlt) {
+      const viewport = document.getElementById('photo-viewport');
+      const dotsEl = document.getElementById('photo-dots');
+      const prevBtn = document.getElementById('photo-prev');
+      const nextBtn = document.getElementById('photo-next');
+
+      const fallbackSvg = `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400'><rect width='300' height='400' fill='%23f5f5f5'/><text x='150' y='200' text-anchor='middle' dy='.3em' font-family='Inter,system-ui,sans-serif' font-size='48' fill='%23737373'>?</text></svg>`;
+
+      const slidesHtml = images.map((img, i) => {
+        const alt = (img.alt || fallbackAlt || '').replace(/"/g, '&quot;');
+        if (img.type === 'video') {
+          const poster = img.poster || img.src;
+          return `
+            <div class="carousel-slide absolute inset-0 ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500" data-index="${i}">
+              <video src="${img.src}" poster="${poster}" controls playsinline preload="metadata" class="w-full h-full object-cover bg-black"${alt ? ` aria-label="${alt}"` : ''}></video>
+            </div>`;
+        }
+        return `
+          <div class="carousel-slide absolute inset-0 ${i === 0 ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-500" data-index="${i}">
+            <img src="${img.src}" alt="${alt}" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='${fallbackSvg}';">
+          </div>`;
+      }).join('');
+
+      viewport.innerHTML = slidesHtml;
+      carouselSlides = Array.from(viewport.querySelectorAll('.carousel-slide'));
+      carouselIndex = 0;
+
+      // Listen for user interaction on every video so we don't auto-play after they pause
+      carouselSlides.forEach(slide => {
+        const vid = slide.querySelector('video');
+        if (!vid) return;
+        const mark = () => userInteracted.set(vid, true);
+        vid.addEventListener('pause', mark);
+        vid.addEventListener('play', mark);
+      });
+
+      if (images.length > 1) {
+        dotsEl.innerHTML = images.map((_, i) => `<button type="button" data-dot="${i}" class="w-2 h-2 rounded-full ${i === 0 ? 'bg-white' : 'bg-white/40'} hover:bg-white transition-colors"></button>`).join('');
+        dotsEl.querySelectorAll('[data-dot]').forEach(btn => {
+          btn.addEventListener('click', () => goToSlide(parseInt(btn.dataset.dot, 10)));
+        });
+        prevBtn.classList.remove('hidden');
+        nextBtn.classList.remove('hidden');
+        prevBtn.addEventListener('click', () => navigateSlide(-1));
+        nextBtn.addEventListener('click', () => navigateSlide(1));
+      } else {
+        dotsEl.innerHTML = '';
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+      }
+    }
+
+    function goToSlide(index) {
+      if (!carouselSlides.length) return;
+      const total = carouselSlides.length;
+      const next = ((index % total) + total) % total;
+      carouselSlides.forEach((slide, i) => {
+        const isActive = i === next;
+        slide.classList.toggle('opacity-100', isActive);
+        slide.classList.toggle('opacity-0', !isActive);
+        slide.classList.toggle('pointer-events-none', !isActive);
+        // Pause any videos that become hidden
+        if (!isActive) {
+          const vid = slide.querySelector('video');
+          if (vid && !vid.paused) vid.pause();
+        }
+      });
+      // Play video if it just became active, but only if user hasn't manually paused it before
+      const activeVid = carouselSlides[next].querySelector('video');
+      if (activeVid && !userInteracted.get(activeVid)) {
+        activeVid.currentTime = 0;
+        activeVid.play().catch(() => {});
+      }
+      carouselIndex = next;
+      const dots = document.querySelectorAll('#photo-dots [data-dot]');
+      dots.forEach((d, i) => {
+        d.classList.toggle('bg-white', i === next);
+        d.classList.toggle('bg-white/40', i !== next);
+      });
+    }
+
+    function navigateSlide(delta) {
+      goToSlide(carouselIndex + delta);
+    }
+
+    // Keyboard + swipe navigation for carousel
+    document.addEventListener('keydown', function (e) {
+      if (!carouselSlides.length || carouselSlides.length < 2) return;
+      if (e.key === 'ArrowLeft') navigateSlide(-1);
+      if (e.key === 'ArrowRight') navigateSlide(1);
+    });
+
+    (function setupSwipe() {
+      const viewport = document.getElementById('photo-viewport');
+      let startX = null;
+      viewport.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      viewport.addEventListener('touchend', e => {
+        if (startX === null) return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 40) navigateSlide(dx > 0 ? -1 : 1);
+        startX = null;
+      });
+    })();
 
     function bioCard({ icon, label, content, list, accent }) {
       const bg = accent ? 'bg-dojo-50 border-dojo-200' : 'bg-ink-50 border-ink-200';
@@ -243,9 +359,15 @@
       document.getElementById('profile-loading').classList.add('hidden');
       document.getElementById('profile-content').classList.remove('hidden');
 
-      document.getElementById('member-photo').src = member.photo;
-      document.getElementById('member-photo').alt = member.name;
-      document.getElementById('member-role').textContent = member.role;
+      const gallery = (member.images && member.images.length)
+        ? member.images
+        : [{ type: 'image', src: member.photo, alt: member.name }];
+
+      renderPhotoCarousel(gallery, member.name);
+
+      document.getElementById('member-role').textContent = member.secondary_role
+        ? `${member.role} · ${member.secondary_role}`
+        : member.role;
       document.getElementById('member-name').textContent = member.name;
       document.getElementById('member-move').textContent = member.signature_move;
       document.getElementById('member-quote').textContent = member.quote;

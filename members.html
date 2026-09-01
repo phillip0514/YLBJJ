@@ -69,12 +69,12 @@
 
   <!-- Filters -->
   <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-12">
-    <div class="flex justify-center border-b border-ink-200">
+    <div class="flex justify-center flex-wrap border-b border-ink-200">
       <button onclick="filterMembers('all')" id="filter-all" class="filter-active px-5 py-3 text-sm font-medium transition-colors">全部</button>
+      <button onclick="filterMembers('cat')" id="filter-cat" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">喵</button>
       <button onclick="filterMembers('coach')" id="filter-coach" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">教練</button>
       <button onclick="filterMembers('fighter')" id="filter-fighter" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">拳手</button>
       <button onclick="filterMembers('member')" id="filter-member" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">會員</button>
-      <button onclick="filterMembers('cat')" id="filter-cat" class="filter-inactive px-5 py-3 text-sm font-medium transition-colors">🐱 喵</button>
     </div>
   </div>
 
@@ -118,14 +118,27 @@
       const noResults = document.getElementById('no-results');
       const filtered = allMembers.filter(m => {
         if (filter === 'all') return true;
-        const role = m.role.toLowerCase();
+        const role = (m.role || '').toLowerCase();
+        const isCat = m.category === 'cat' || role.includes('喵') || role.includes('拳館貓');
+        if (filter === 'cat') return isCat;
+        if (isCat) return false;
         if (filter === 'coach') return role.includes('教練') || role.includes('coach');
         if (filter === 'fighter') return role.includes('拳手') || role.includes('fighter');
-        if (filter === 'member') return role.includes('會員') || role.includes('學員') || role.includes('member') || m.category === 'member' || m.show_in_members;
-        if (filter === 'cat') return m.category === 'cat';
+        if (filter === 'member') return role.includes('會員') || role.includes('member') || m.category === 'member' || m.show_in_members;
         return true;
       });
 
+      // Pull 木村 out and pin to top, then shuffle the rest randomly
+      const kimuraEntry = filtered.find(m => m.id === 'kimura');
+      let ordered = filtered.filter(m => m.id !== 'kimura');
+      for (let i = ordered.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [ordered[i], ordered[j]] = [ordered[j], ordered[i]];
+      }
+      if (kimuraEntry) ordered = [kimuraEntry, ...ordered];
+
+      const isCatFilter = filter === 'cat';
+      const isFeaturedCat = isCatFilter && !!kimuraEntry;
       grid.innerHTML = '';
       noResults.classList.add('hidden');
 
@@ -134,21 +147,95 @@
         return;
       }
 
-      filtered.forEach(member => {
+      ordered.forEach((member, idx) => {
         // Replace "學員" with "會員" in role display
         const displayRole = member.role.replace(/學員/g, '會員');
-        
+
+        const isFeatured = isFeaturedCat && idx === 0;
         const card = document.createElement('a');
         card.href = `profile.html?id=${member.id}`;
-        card.className = 'group block bg-white border border-ink-200 rounded-2xl overflow-hidden hover:border-ink-900 hover:shadow-lg transition-all duration-300';
-        card.innerHTML = `
-          <div class="aspect-[4/5] bg-ink-100 overflow-hidden relative">
-            <img src="${member.photo}" alt="${member.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">
+        card.className = isFeatured
+          ? 'group block bg-white border border-ink-200 rounded-2xl overflow-hidden hover:border-ink-900 hover:shadow-xl transition-all duration-300 md:col-span-2 lg:col-span-3'
+          : 'group block bg-white border border-ink-200 rounded-2xl overflow-hidden hover:border-ink-900 hover:shadow-lg transition-all duration-300';
+        const hasGallery = member.images && member.images.length > 1;
+        const galleryTotal = hasGallery ? member.images.length : 0;
+        const dotsHtml = hasGallery ? `<div class="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+          ${member.images.map((_, i) => `<span class="w-1.5 h-1.5 rounded-full ${i===0?'bg-white':'bg-white/40'}"></span>`).join('')}
+        </div>` : '';
+        let coverHtml;
+        const isVideoCover = (member.photo || '').match(/\.(mp4|mov|webm)(\?|$)/i);
+        if (isVideoCover) {
+          const poster = member.photo_poster || '';
+          const sources = [];
+          if (member.photo) sources.push(`<source src="${member.photo}" type="video/mp4">`);
+          // Fallback chain from images[] in case photo isn't a video URL
+          (member.images || []).forEach(img => {
+            if (img.type === 'video' && img.src !== member.photo) {
+              sources.push(`<source src="${img.src}" type="video/mp4">`);
+            }
+          });
+          coverHtml = `
+            <video autoplay muted loop playsinline preload="metadata"${poster ? ` poster="${poster}"` : ''} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" aria-label="${member.name} 影片封面">
+              ${sources.join('')}
+            </video>`;
+        } else {
+          coverHtml = `<img src="${member.photo}" alt="${member.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" loading="lazy">`;
+        }
+
+        const aspectClass = isFeatured ? 'aspect-[3/4]' : 'aspect-[4/5]';
+        const coverWrapClass = isFeatured
+          ? 'bg-ink-100 overflow-hidden relative aspect-[3/4] max-h-[640px] mx-auto w-full max-w-[480px]'
+          : `${aspectClass} bg-ink-100 overflow-hidden relative`;
+        const secondaryRoleHtml = member.secondary_role
+          ? `<span class="inline-flex w-fit items-center gap-2 bg-white/80 backdrop-blur-sm text-dojo-700 text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded-full mb-3 border border-dojo-200">🐾 ${member.role} · ${member.secondary_role}</span>`
+          : `<span class="inline-flex w-fit items-center gap-2 bg-white/80 backdrop-blur-sm text-dojo-700 text-xs font-bold tracking-wider uppercase px-3 py-1.5 rounded-full mb-3 border border-dojo-200">🐾 ${member.role}</span>`;
+        const statBlocks = [];
+        if (member.signature_move) {
+          statBlocks.push(`<div class="bg-white/80 backdrop-blur-sm border border-ink-200 rounded-xl p-4"><div class="text-xs text-ink-500 mb-1 font-semibold uppercase tracking-wider">招牌技能</div><div class="text-base font-bold text-ink-900">⚡ ${member.signature_move}</div></div>`);
+        }
+        if (member.hobby) {
+          statBlocks.push(`<div class="bg-white/80 backdrop-blur-sm border border-ink-200 rounded-xl p-4"><div class="text-xs text-ink-500 mb-1 font-semibold uppercase tracking-wider">隱藏愛好</div><div class="text-base font-bold text-ink-900">🎯 ${member.hobby}</div></div>`);
+        }
+        if (member.years) {
+          statBlocks.push(`<div class="bg-white/80 backdrop-blur-sm border border-ink-200 rounded-xl p-4"><div class="text-xs text-ink-500 mb-1 font-semibold uppercase tracking-wider">習武年資</div><div class="text-base font-bold text-ink-900">${member.years}</div></div>`);
+        }
+        if (member.achievements) {
+          statBlocks.push(`<div class="bg-white/80 backdrop-blur-sm border border-ink-200 rounded-xl p-4"><div class="text-xs text-ink-500 mb-1 font-semibold uppercase tracking-wider">戰績</div><div class="text-base font-bold text-ink-900">🏆 ${member.achievements}</div></div>`);
+        }
+        const cardBody = isFeatured ? `
+          <div class="p-6 md:p-8 bg-gradient-to-br from-dojo-50 to-white">
+            <div class="grid grid-cols-1 md:grid-cols-[420px_1fr] gap-6 md:gap-10 items-center">
+              <div class="${coverWrapClass}">
+                ${coverHtml}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+                ${member.signature_move ? `<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-ink-800 text-xs font-medium px-3 py-1.5 rounded-full shadow">⚡ ${member.signature_move}</div>` : ''}
+                ${hasGallery ? `<span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full">📷 ${galleryTotal}</span>` : ''}
+                ${hasGallery ? dotsHtml : ''}
+              </div>
+              <div>
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                  <div>
+                    ${secondaryRoleHtml}
+                    <h3 class="text-3xl md:text-4xl font-bold tracking-tight">${member.name}</h3>
+                    ${member.name_en ? `<p class="text-sm text-ink-500 mt-1">${member.name_en}</p>` : ''}
+                    ${member.secondary_role_note ? `<p class="text-xs text-ink-400 mt-1 italic">${member.secondary_role_note}</p>` : ''}
+                  </div>
+                  <span class="inline-flex items-center gap-2 bg-ink-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold group-hover:bg-dojo-700 transition-colors w-fit">查看介紹 →</span>
+                </div>
+                ${member.quote ? `<p class="text-xl md:text-2xl text-ink-800 italic leading-relaxed mb-6 font-medium">"${member.quote}"</p>` : ''}
+                ${member.bio ? `<p class="text-sm text-ink-600 leading-relaxed mb-6">${member.bio}</p>` : ''}
+                ${statBlocks.length ? `<div class="grid grid-cols-2 md:grid-cols-4 gap-3">${statBlocks.join('')}</div>` : ''}
+              </div>
+            </div>
+          </div>` : `
+          <div class="${aspectClass} bg-ink-100 overflow-hidden relative">
+            ${coverHtml}
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             ${member.signature_move ? `<div class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-ink-800 text-xs font-medium px-3 py-1.5 rounded-full shadow">⚡ ${member.signature_move}</div>` : ''}
             <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
               <span class="text-white text-xs font-medium tracking-wider uppercase bg-white/20 backdrop-blur-md px-3 py-1 rounded-full">${displayRole}</span>
             </div>
+            ${hasGallery ? `<span class="absolute top-4 left-4 bg-black/60 backdrop-blur-md text-white text-[10px] font-semibold tracking-wider uppercase px-2.5 py-1 rounded-full">📷 ${galleryTotal}</span>${dotsHtml}` : ''}
           </div>
           <div class="p-5">
             <div class="flex items-start justify-between gap-2 mb-3">
@@ -163,8 +250,8 @@
               </span>` : ''}
             </div>
             ${member.quote ? `<p class="text-sm text-ink-600 italic line-clamp-2">"${member.quote}"</p>` : ''}
-          </div>
-        `;
+          </div>`;
+        card.innerHTML = cardBody;
         grid.appendChild(card);
       });
     }
